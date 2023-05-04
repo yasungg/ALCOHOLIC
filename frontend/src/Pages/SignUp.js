@@ -6,7 +6,8 @@ const Container = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-evenly;
-
+  width: 100%;
+  height: 100%;
 .sign {
     display: flex;
     align-items: center;
@@ -19,11 +20,12 @@ const Container = styled.div`
 }
 .hr {
   border: solid 1px #090808;
-  width: 700px;
+  width: 50%;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 .item {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,6 +55,10 @@ const Container = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: white;
+  margin-bottom: 100px;
+}
+.enable-button:hover {
+    cursor: pointer;
 }
 .disable-button {
   width: 250px;
@@ -63,6 +69,7 @@ const Container = styled.div`
   font-size: 20px;
   font-weight: bold;
   color: white;
+  margin-bottom: 100px;
 }
 .input {
   width: 300px;
@@ -72,9 +79,6 @@ const Container = styled.div`
   margin-top: 10px;
   margin-bottom: 10px;
   border: 1px solid;
-}
-.checkbox {
-
 }
 `;
 
@@ -185,7 +189,7 @@ const SignUp = () => {
         </div>
         <div className="item">
             <label className="label" for = "jumin">생년월일</label>
-            <input className="input" type="text" placeholder="ex)980905,000420" value ={inputJumin} onChange={onChangeJumin}/>
+            <input className="input" type="text" placeholder="ex)19980905,20010420" value ={inputJumin} onChange={onChangeJumin}/>
         </div>
         <div className="item">
             <label className="label" for = "email">이메일</label>
@@ -197,6 +201,7 @@ const SignUp = () => {
         </div>
         <hr className="hr"/>
         <div className="item">
+            <textarea name="" id="" cols="70" rows="10" readOnly></textarea>
             <label className="term">이용약관 확인 및 동의<input className="checkbox" type="checkbox" />
             </label>           
         </div>
