@@ -1,10 +1,10 @@
-package com.kh.mini_masilrang;
+package mini.masilang;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MiniMasilrangApplicationTests {
+class MasilangApplicationTests {
 
 	@Test
 	void contextLoads() {

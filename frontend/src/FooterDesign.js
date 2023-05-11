@@ -7,8 +7,11 @@ const FooterDesign = () => {
     flex-direction: column;
     margin-top: 100px;
     width: 100%;
-    height: 350px;
+    height: 200px;
     border-top: 1px solid rgb(223, 214, 210);
+    @media screen and (max-width: 1024px) {
+      height: 350px;
+    }
   `;
   const UpperBox = styled.div`
     width: 80%;
@@ -17,6 +20,14 @@ const FooterDesign = () => {
     display: flex;
     justify-content: space-between;
     align-self: center;
+    @media screen and (max-width: 1024px) {
+      width: 95%;
+      margin: 10px 20px 10px 20px;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      height: 70%;
+    }
   `;
   const NameBox = styled.div`
     width: 250px;
@@ -32,7 +43,7 @@ const FooterDesign = () => {
       margin-top: 5px;
     }
     .thirdLine {
-      font-size: .8em;
+      font-size: .6em;
       margin: 0;
     }
   `;
@@ -41,6 +52,9 @@ const FooterDesign = () => {
   width: 400px;
   justify-content: space-between;
   align-self: flex-start;
+  @media screen and (max-width: 1024px) {
+    align-self: center;
+  }
   `;
   const FooterButton = styled.button`
   width: 150px;
@@ -71,14 +85,17 @@ const FooterDesign = () => {
     display: flex;
     flex-direction: column;
     align-self: center;
-    width: 80%;
+    width: 80%; 
     margin: 0 20px 0 20px;
     .lowBoxA {
-      width: 80px;
+      font-size: .8em;
       text-decoration: none;
+      &:visited {
+        color: black;
+      }
     }
     .lowBoxSpan {
-
+      font-size: .8em;
     }
   `;
   
@@ -103,11 +120,12 @@ const FooterDesign = () => {
         </SNSBox>
       </UpperBox>
       <LowBox>
-        <span className="lowBoxSpan">대표 : 이재욱</span>
-        <span className="lowBoxSpan">사업자등록번호 : 620-81-58299</span>
-        <a className="lowBoxA" href="/">사업자확인</a>
-        <span className="lowBoxSpan">통신판매 신고번호: 2021-서울서초-2084</span>
-
+        
+          <span className="lowBoxSpan">대표 : 곽용석</span>
+          <a className="lowBoxA" href="/">사업자등록번호 : xxx-xx-xxxxx</a>
+          <span className="lowBoxSpan">통신판매 신고번호: 2021-서울서초-xxxx</span>
+          <span className="lowBoxSpan">All right reserved. @masilang 2023.</span>
+        
       </LowBox>
     </FooterContainer>
   )
