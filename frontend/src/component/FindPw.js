@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import HeaderDesign from "../HeaderDesign";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal";
 
 const Container = styled.div`
   display: flex;
@@ -57,6 +59,41 @@ const Find = styled.div`
 const FindPw = () => {
 
 
+    const [inputId, setInputId] = useState("");
+
+    const onChangeId = (e) => {
+        setInputId(e.target.value);
+    }
+
+    const onClickPwInfo = async() => {
+        const response = await AxiosApi.PwGet(inputId)
+        if(response.status === 200)
+        console.log(response.data[0])
+        if(response.data[0] === undefined) {
+            setModalOpen(true);
+            setModalText("찾을 수 없는 비밀번호입니다.")    
+        } else {
+            setModalOpen(true);
+            setModalText("비밀번호: " + response.data[0].user_pw)  
+        }    
+        
+    }
+
+
+
+    // 팝업처리(모달)
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalText, setModalText] = useState("");
+
+    const confirmBtn = () => {
+       setModalOpen(false);
+        console.log("확인 버튼이 눌려 졌습니다.");
+    }
+    const closeModal = () => {
+       setModalOpen(false);
+   };
+
+
     return (
         <Container>
             <HeaderDesign/>
@@ -64,10 +101,13 @@ const FindPw = () => {
             <span>비밀번호 찾기</span>
         </div>
         <Item>
-        <Input type="text" placeholder="아이디를 입력해주세요" />
+        <Input type="text" placeholder="아이디를 입력해주세요" value={inputId} onChange={onChangeId}/>
         <Input type="email" placeholder="이메일을 입력해주세요"/>
         </Item>
-      <Find><button className="pwfindbutton">확인</button></Find>
+      <Find>
+        <button className="pwfindbutton" onClick={onClickPwInfo}>확인</button>
+        <Modal open={modalOpen} type={true} confirm={confirmBtn} close={closeModal} header="비밀번호 찾기">{modalText}</Modal>
+        </Find>
     </Container>
 
 

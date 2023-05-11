@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import HeaderDesign from "../HeaderDesign";
+import AxiosApi from "../api/AxiosApi";
+import Modal from "../utils/Modal";
 
 const Container = styled.div`
   display: flex;
@@ -57,6 +59,38 @@ const Find = styled.div`
 
 const FindId = () => {
 
+    const [inputEmail, setInputEmail] = useState("");
+
+    const onChangeEmail = (e) => {
+        setInputEmail(e.target.value);
+
+    }
+
+    const onClickIdInfo = async() => {
+        const response = await AxiosApi.IdGet(inputEmail)
+        if(response.status === 200)
+        console.log(response.data[0])
+        if(response.data[0] === undefined) {
+            setModalOpen(true);
+            setModalText("찾을 수 없는 아이디입니다.")    
+        } else {
+            setModalOpen(true);
+            setModalText("아이디: " + response.data[0].user_id)  
+        }    
+        
+    }
+
+     // 팝업처리(모달)
+     const [modalOpen, setModalOpen] = useState(false);
+     const [modalText, setModalText] = useState("");
+ 
+     const confirmBtn = () => {
+        setModalOpen(false);
+         console.log("확인 버튼이 눌려 졌습니다.");
+     }
+     const closeModal = () => {
+        setModalOpen(false);
+    };
 
     return (
         <Container>
@@ -65,10 +99,14 @@ const FindId = () => {
                 <span>아이디 찾기</span>
             </div>
             <Item>
-            <Input type="text" placeholder="이름을 입력해주세요" />
-            <Input type="email" placeholder="이메일을 입력해주세요"/>
+            <Input type="text" placeholder="이름을 입력해주세요"/>
+            <Input type="email" placeholder="이메일을 입력해주세요" value={inputEmail} onChange={onChangeEmail}/>
             </Item>
-          <Find><button className="idfindbutton">확인</button></Find>
+          <Find>
+            <button onClick={onClickIdInfo} className="idfindbutton">확인</button>
+            <Modal open={modalOpen} type={true} confirm={confirmBtn} close={closeModal} header="아이디 찾기">{modalText}</Modal>
+          </Find>
+          
         </Container>
 
     );

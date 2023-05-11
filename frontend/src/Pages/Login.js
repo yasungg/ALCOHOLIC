@@ -2,6 +2,9 @@ import React, { useState }from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import HeaderDesign from "../HeaderDesign";
+import AxiosApi from "../api/AxiosApi";
+import { KAKAO_AUTH_URL } from "../component/OAuth";
+import KaKaoLogin from "../component/KaKaoLogin";
 
     const Container = styled.div`
       display: flex;
@@ -92,11 +95,14 @@ import HeaderDesign from "../HeaderDesign";
       }
       .findbutton:hover {
         cursor: pointer;
+        transition: all .5s;
+        color: rgba(223, 214, 210);
       }
+    `;
+    const KaKaoButton =styled.button`
     `;
 
     const Login = () => {
-    
     // 키보드 입력 받기
     const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
@@ -109,10 +115,24 @@ import HeaderDesign from "../HeaderDesign";
         setInputId(e.target.value);
         setIsId(true);
     }
-    const onChangePw = e => {
+    const onChangePw = (e) => {
         setInputPw(e.target.value);
         setIsPw(true);
     }
+    const onClickLogin = async() => {
+        // 로그인을 위해 axios 호출
+        const response = await AxiosApi.memberLogin(inputId, inputPw);
+        console.log(response.data);
+        if(response.data === true) {
+           console.log("로그인 성공");
+        } else {
+            console.log("로그인 에러");
+        }
+  }
+
+
+  
+    
 
 
     return (
@@ -123,9 +143,7 @@ import HeaderDesign from "../HeaderDesign";
           </div>
           <div className="item">
             <Input type="text" placeholder="아이디를 입력해주세요" value={inputId} onChange={onChangeId}/>
-            {inputId.length > 0 && <span className={`${isId ? "success" : "error"}`}></span>}
             <Input type="password" placeholder="비밀번호를 입력해주세요" value={inputPw} onChange={onChangePw}/>
-            {inputPw.length > 0 && (<span className={`${isPw ? 'success' : 'error'}`}></span>)}
           </div>
 
           <Find>
@@ -139,15 +157,16 @@ import HeaderDesign from "../HeaderDesign";
           </Find>
           <div className="item2">
           {(isId && isPw) ?
-                <button className="login-enable-button" >로그인</button>  :
+                <button className="login-enable-button" onClick={onClickLogin}>로그인</button>  :
                 <button className="login-disable-button" >로그인</button>}
           </div>
           <div className="item2">
             <Link to = "/SignUp">
             <button className="signbutton">회원가입</button>
             </Link>
-            
+            <KaKaoLogin/>
           </div>
+          
         </Container>
       );
     };
