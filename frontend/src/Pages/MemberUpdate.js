@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState }from "react";
 import styled from "styled-components";
 import HeaderDesign from "../HeaderDesign";
 
@@ -9,7 +9,8 @@ const Container = styled.div`
   justify-content: space-evenly;
   width: 100%;
   height: 100%;
-.sign {
+
+  .sign {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -83,13 +84,8 @@ const Container = styled.div`
 }
 `;
 
-
-
-
-const SignUp = () => {
-
+const MemberUpdate = () => {
     // 키보드 입력
-    const [inputId, setInputId] = useState("");
     const [inputPw, setInputPw] = useState("");
     const [inputConPw, setInputConPw] = useState("");
     const [inputName, setInputName] = useState("");
@@ -103,7 +99,6 @@ const SignUp = () => {
     const [conPwMessage, setConPwMessage] = useState("");
     
     // 유효성 검사
-    const [isId, setIsId] = useState(false);
     const [isPw, setIsPw] = useState(false)
     const [isConPw, setIsConPw] = useState(false);
     const [isName, setIsName] = useState(false);
@@ -112,11 +107,6 @@ const SignUp = () => {
     const [isPhone, setIsPhone] = useState(false);
 
 
-
-    const onChangeId = (e) => {
-        setInputId(e.target.value)
-        setIsId(true);
-    }
     const onChangePw = (e) => {
         const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+~`|}{[\]\\:';"<>?,./])[A-Za-z\d!@#$%^&*()_+~`|}{[\]\\:';"<>?,./]{8,}$/
         const passwordCurrent = e.target.value ;
@@ -157,18 +147,13 @@ const SignUp = () => {
         setIsPhone(true);
     }
 
-
-    return(
+    return (
         <Container>
             <HeaderDesign/>
           <div className="sign">
-            <span>회원 가입</span>
+            <span>회원 정보 수정</span>
           </div>
           <hr className="hr"/>
-        <div className="item">
-            <label className="label" for = "id">아이디</label>
-            <input className="input" placeholder="아이디를 입력해주세요" value ={inputId} onChange={onChangeId}/>            
-        </div>
         <div className="item">
             <label className="label" for = "password">비밀번호</label>
             <input className="input" type="password" placeholder="숫자+영문자+특수문자 조합으로 8자리 이상 입력해주세요" value ={inputPw} onChange={onChangePw}/>
@@ -203,17 +188,11 @@ const SignUp = () => {
         </div>
         <hr className="hr"/>
         <div className="item">
-            <textarea name="" id="" cols="70" rows="10" readOnly></textarea>
-            <label className="term">이용약관 확인 및 동의<input className="checkbox" type="checkbox" />
-            </label>           
-        </div>
-        <br />
-        <div className="item">
-            {(isId && isPw && isConPw && isName && isJumin && isMail && isPhone) ? 
-            <button className="enable-button" >가입하기</button> :
-            <button className="disable-button">가입하기</button>}
+            {(isPw && isConPw && isName && isJumin && isMail && isPhone) ? 
+            <button className="enable-button" >회원정보수정</button> :
+            <button className="disable-button">회원정보수정</button>}
         </div>
         </Container>
-    )
+    );
 };
-export default SignUp;
+export default MemberUpdate;

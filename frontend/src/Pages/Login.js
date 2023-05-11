@@ -1,7 +1,7 @@
 import React, { useState }from "react";
 import styled from "styled-components";
-
-
+import { Link } from "react-router-dom";
+import HeaderDesign from "../HeaderDesign";
 
     const Container = styled.div`
       display: flex;
@@ -9,7 +9,7 @@ import styled from "styled-components";
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
-      height: 100vh;
+      height: 100%;
       .Login {
         display: flex;
         flex-direction: column;
@@ -17,6 +17,7 @@ import styled from "styled-components";
         font-size: 40px;
         font-weight: bold;
         margin-bottom: 20px;
+        margin-top: 50px;
       }
       .item {
         display: flex;
@@ -46,7 +47,7 @@ import styled from "styled-components";
       .login-disable-button {
         width: 400px;
         height: 60px;
-        background-color: gray;
+        background-color: #c19f8a;
         border-style: none;
         font-weight: bold;
         color: white;
@@ -86,7 +87,7 @@ import styled from "styled-components";
       .findbutton {
         border-style: none;
         background-color: white;
-        margin-left: 260px;
+        margin-left: 300px;
         font-weight: bold;
       }
       .findbutton:hover {
@@ -116,6 +117,7 @@ import styled from "styled-components";
 
     return (
         <Container>
+            <HeaderDesign/>
           <div className="Login">
             <span>로그인</span>
           </div>
@@ -127,7 +129,13 @@ import styled from "styled-components";
           </div>
 
           <Find>
-            <button className="findbutton">아이디/비밀번호 찾기</button>
+            <Link to="/FindId">
+            <button className="findbutton">아이디 찾기</button>
+            </Link>
+            <Link to="/FindPw">
+            <button className="findbutton">비밀번호 찾기</button>
+            </Link>
+            
           </Find>
           <div className="item2">
           {(isId && isPw) ?
@@ -135,7 +143,10 @@ import styled from "styled-components";
                 <button className="login-disable-button" >로그인</button>}
           </div>
           <div className="item2">
+            <Link to = "/SignUp">
             <button className="signbutton">회원가입</button>
+            </Link>
+            
           </div>
         </Container>
       );
