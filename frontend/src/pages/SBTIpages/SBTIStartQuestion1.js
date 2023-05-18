@@ -3,6 +3,8 @@ import AxiosApi from "../../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import X from "../../images/x.png";
+
 
 const OutBox = styled.div`
   padding-bottom: 100px;
@@ -27,6 +29,14 @@ const Container = styled.div`
   align-items: center;
   padding-bottom: 50px;
   text-align: left;
+
+  .close {
+    width: 15px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: -90px;
+    cursor: pointer;
+  }
 
   .progress {
     p {
@@ -54,7 +64,7 @@ const Container = styled.div`
     justify-content: space-evenly;
   }
 
-  button{
+  /* button{
     cursor: pointer;
     width: 180px;
     height: 60px;
@@ -62,6 +72,64 @@ const Container = styled.div`
     margin-left: 25px;
     box-sizing: border-box;
     border: 2px solid black;
+  } */
+
+  button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 0.6em;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 4em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+
+    &:hover,
+    &:focus {
+      color: brown;
+      outline: 0;
+    }
+
+    border-color: brown;
+    // border: 0;
+    border-radius: 0;
+    color: brown;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 150ms ease-in-out;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 100%;
+      background: brown;
+      z-index: -1;
+      transition: width 150ms ease-in-out;
+    }
+    
+    &:hover {
+      color: #fff;
+      &:after {
+        width: 110%;
+      }
+    }
   }
 
 
@@ -135,8 +203,9 @@ const SBTIStartQuestion1 = () => {
   return (
     <OutBox>
       <Container>
+        <img className="close" src={X} alt="x" onClick={()=>{navigate("/")}}/>
         <div className="progress">
-          <p>1/20</p>
+          <p>start 1</p>
         </div>
         <div className="question">
           {questInfo && questInfo.map(quest => (

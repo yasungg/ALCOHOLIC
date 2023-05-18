@@ -3,33 +3,123 @@ import AxiosApi from "../../api/AxiosApi";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+import X from "../../images/x.png";
 
-const Container = styled.div`
+const OutBox = styled.div`
+  padding-bottom: 100px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #edeae3;
-  margin: 10%;
+  align-items: center;
+  background-color: beige;
+`;
+
+const Container = styled.div`
+  width: 480px;
+  height: 600px;
+  border: 1px solid black;
+  background-color: white;
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 50px;
+  text-align: left;
+
+  .close {
+    width: 15px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: -90px;
+    cursor: pointer;
+  }
+
+  .progress {
+    p {
+      font-size: 1.7em;
+      font-weight: bold;
+      color: brown;
+    }
+  }
 
   .question{
-    margin-top: 10%;
+    margin-top: -130px;
+    margin-left: 40px;
+    margin-right: 40px;
     font-size: 1.5em;
-    color: #333;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
   }
 
-  .button{
+  .buttonBox {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
   }
 
+  button {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid black;
+    border-radius: 0.6em;
+    color: black;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 4em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 
+    &:hover,
+    &:focus {
+      color: brown;
+      outline: 0;
+    }
+
+    border-color: brown;
+    // border: 0;
+    border-radius: 0;
+    color: brown;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 150ms ease-in-out;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 100%;
+      background: brown;
+      z-index: -1;
+      transition: width 150ms ease-in-out;
+    }
+    
+    &:hover {
+      color: #fff;
+      &:after {
+        width: 110%;
+      }
+    }
+  }
 `;
 
 
@@ -98,26 +188,26 @@ const SBTI20 = () => {
 
 
   return (
-    <Container>
-      <div className="question">
-        {questInfo && questInfo.map(quest => (
-          <div key={quest.number}>
-            <p>질문 : {quest.question}</p>
-          </div>
-        ))}
-      </div>
-      <div className="button">
-        <button onClick={clickYes}>그렇다</button>
-        <button onClick={clickNo}>아니다</button>
-      </div>
-      <div>
-        <p>탁주: {window.localStorage.getItem("takju")}</p>
-        <p>청주: {window.localStorage.getItem("chungju")}</p>
-        <p>과실주: {window.localStorage.getItem("wine")}</p>
-        <p>증류주: {window.localStorage.getItem("spirits")}</p>
-      </div>
+    <OutBox>
+      <Container>
+        <img className="close" src={X} alt="x" onClick={()=>{navigate("/")}}/>
+        <div className="progress">
+          <p>20/20</p>
+        </div>
+        <div className="question">
+          {questInfo && questInfo.map(quest => (
+            <div key={quest.number}>
+              <p>{quest.question}</p>
+            </div>
+          ))}
+        </div>
+        <div className="buttonBox">
+          <button onClick={clickYes}>그렇다</button>
+          <button onClick={clickNo}>아니다</button>
+        </div>
 
-    </Container>
+      </Container>
+    </OutBox>
   );
 };
 export default SBTI20;
