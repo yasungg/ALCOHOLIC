@@ -85,7 +85,7 @@ const SBTI18 = () => {
       if(item.answer1 === "과실주" || item.answer2 === "과실주") decreaseInteger("wine");
       if(item.answer1 === "증류주" || item.answer2 === "증류주") decreaseInteger("spirits");
     });
-    navigate("/SBTI9");
+    navigate("/SBTI19");
   }
 
   useEffect(() => {

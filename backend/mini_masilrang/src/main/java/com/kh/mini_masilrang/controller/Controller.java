@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 // 프론트(3000)랑 백(8111)이랑 포트가 다른 것은 에러처리 하지 말도록 예외처리
 @CrossOrigin(origins = "http://localhost:3000")
@@ -34,13 +35,40 @@ public class Controller {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/sbticategory")
+    @GetMapping("/sbtirecommend")
     public  ResponseEntity<List<SBTIResultVO>> sbtiList(@RequestParam String cat) {
         System.out.println("카테고리: " + cat);
         SBTIResultDAO dao = new SBTIResultDAO();
-        List<SBTIResultVO> list = dao.sbtiCategory(cat);
+        List<SBTIResultVO> list = dao.sbtiRecommend(cat);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @PostMapping("/sbtiupdate")
+    public ResponseEntity<Boolean> sbtiUpdate(@RequestBody SbtiUpdateRequest sbtiData) {
+        int getId = sbtiData.getNo();
+        String getSbtiRes = sbtiData.getSbti();
+        MemberDAO dao = new MemberDAO();
+        boolean isTrue = dao.sbtiUpdate(getId, getSbtiRes);
+        return new ResponseEntity<>(isTrue, HttpStatus.OK);
+    }
 
+}
+
+class SbtiUpdateRequest {
+    private int no;
+    private String sbti;
+
+    public int getNo() {
+        return no;
+    }
+    public void setNo(int no) {
+        this.no = no;
+    }
+
+    public String getSbti() {
+        return sbti;
+    }
+    public void setSbti(String sbti) {
+        this.sbti = sbti;
+    }
 }

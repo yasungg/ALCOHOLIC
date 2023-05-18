@@ -7,6 +7,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class MemberDAO {
     private Connection conn = null;
     private Statement stmt = null;
@@ -50,5 +52,26 @@ public class MemberDAO {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public boolean sbtiUpdate(int userNo, String userSbti) {
+        int result = 0;
+        String sql = "UPDATE MEMBER_INFO SET USER_SBTI = ? WHERE USER_NO = ?";
+        try {
+            conn = Common.getConnection();
+            pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1,userSbti);
+            pStmt.setInt(2, userNo);
+            result = pStmt.executeUpdate();
+            System.out.println("sbti 업데이트 결과: " + userNo + " -> " + userSbti);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Common.close(pStmt);
+        Common.close(conn);
+
+        if (result == 1) return true;
+        else return false;
     }
 }

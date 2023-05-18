@@ -53,10 +53,10 @@ CREATE TABLE SBTI_RESULT
 	RES_SUL_IMG VARCHAR(500)
 );
 
-INSERT INTO SBTI_RESULT VALUES(1, '숙취가 두렵지 않은 탄산 러버', '막쿠르트', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/fWO1-1668403134296-1Z7A1584.jpg');
-INSERT INTO SBTI_RESULT VALUES(2, '숙취가 두렵지 않은 탄산 러버', '삼양춘', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/lYo2-1657767149603-00.jpg');
-INSERT INTO SBTI_RESULT VALUES(3, '숙취가 두렵지 않은 탄산 러버', '세종 알밤주', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/zNh6-1658109835900-0.jpg');
-INSERT INTO SBTI_RESULT VALUES(4, '숙취가 두렵지 않은 탄산 러버', '마실꾸지', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/a7pq-1649400825257-1.jpg');
+INSERT INTO SBTI_RESULT VALUES(1, '숙취가 두렵지 않은 탁주 러버', '막쿠르트', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/fWO1-1668403134296-1Z7A1584.jpg');
+INSERT INTO SBTI_RESULT VALUES(2, '숙취가 두렵지 않은 탁주 러버', '삼양춘', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/lYo2-1657767149603-00.jpg');
+INSERT INTO SBTI_RESULT VALUES(3, '숙취가 두렵지 않은 탁주 러버', '세종 알밤주', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/zNh6-1658109835900-0.jpg');
+INSERT INTO SBTI_RESULT VALUES(4, '숙취가 두렵지 않은 탁주 러버', '마실꾸지', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/a7pq-1649400825257-1.jpg');
 INSERT INTO SBTI_RESULT VALUES(5, '청아하고 우아한 한잔', '고흥 유자주', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/rC0W-1659321041025-0.jpg');
 INSERT INTO SBTI_RESULT VALUES(6, '청아하고 우아한 한잔', '동학 1957', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/TOnv-1655794504098-1.jpg');
 INSERT INTO SBTI_RESULT VALUES(7, '청아하고 우아한 한잔', '궁중술 왕주', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/Tl1R-1672193066583-wang+%281%29.jpg');
@@ -69,7 +69,6 @@ INSERT INTO SBTI_RESULT VALUES(13, '깔끔하게 묵직하게', '금설', 'https://d38cxpf
 INSERT INTO SBTI_RESULT VALUES(14, '깔끔하게 묵직하게', '추사 40%', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/Pmvo-1654844288132-THUMB.jpg');
 INSERT INTO SBTI_RESULT VALUES(15, '깔끔하게 묵직하게', '서울고량주 레드', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/hkA6-1666236696597-thumb_red.jpg');
 INSERT INTO SBTI_RESULT VALUES(16, '깔끔하게 묵직하게', '진도백주', 'https://d38cxpfv0ljg7q.cloudfront.net/admin_contents/detail/UTA6-1682479792760-%EC%8D%B8%EB%84%A4%EC%9D%BC-2.jpg');
-
 
 COMMIT;
 
@@ -86,7 +85,7 @@ CREATE TABLE MEMBER_INFO
 	USER_JUMIN VARCHAR(14),
 	USER_EMAIL VARCHAR(50),
 	USER_PHONE VARCHAR(13),
-	USER_SBTI VARCHAR(20)
+	USER_SBTI VARCHAR(50)
 );
 
 /* 회원번호 증가 시퀀스 */
@@ -111,4 +110,9 @@ INSERT INTO MEMBER_INFO VALUES(USER_SQNO.NEXTVAL, 'TWICE1', 'JYPMUSIC1', '임나연
 SELECT * FROM MEMBER_INFO;
 COMMIT;
 
+DROP TABLE MEMBER_INFO;
+DROP SEQUENCE USER_SQNO;
+
+
+SELECT * FROM SBTI_RESULT WHERE RES_CATEGORY = '와인 말고 전통주'
 

@@ -11,16 +11,16 @@ const AxiosApi = {
     return await axios.get(KH_DOMAIN + `/user?no=${no}`)
   },
 
-  userSbti: async(no, sbti) => {
+  sbtiUpdate: async(no, sbti) => {
     const member = {
       no : no,
       sbti : sbti
     };
-    return await axios.post(KH_DOMAIN + "/sbtiresult", member);
+    return await axios.post(KH_DOMAIN + "/sbtiupdate", member);
   },
 
-  sbtiResult: async(category) => {
-    return await axios.get(KH_DOMAIN + `/sbticategory?cat=${category}`)
+  sbtiRecommend: async(category) => {
+    return await axios.get(KH_DOMAIN + `/sbtirecommend?cat=${category}`)
   }
 
 
