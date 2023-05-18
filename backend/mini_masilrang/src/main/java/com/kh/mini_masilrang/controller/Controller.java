@@ -45,8 +45,8 @@ public class Controller {
 
     @PostMapping("/sbtiupdate")
     public ResponseEntity<Boolean> sbtiUpdate(@RequestBody SbtiUpdateRequest sbtiData) {
-        int getId = sbtiData.getNo();
-        String getSbtiRes = sbtiData.getSbti();
+        int getId = sbtiData.getUser_no();
+        String getSbtiRes = sbtiData.getUser_sbti();
         MemberDAO dao = new MemberDAO();
         boolean isTrue = dao.sbtiUpdate(getId, getSbtiRes);
         return new ResponseEntity<>(isTrue, HttpStatus.OK);
@@ -55,20 +55,20 @@ public class Controller {
 }
 
 class SbtiUpdateRequest {
-    private int no;
-    private String sbti;
+    private int user_no;
+    private String user_sbti;
 
-    public int getNo() {
-        return no;
+    public int getUser_no() {
+        return user_no;
     }
-    public void setNo(int no) {
-        this.no = no;
+    public void setUser_no(int user_no) {
+        this.user_no = user_no;
     }
 
-    public String getSbti() {
-        return sbti;
+    public String getUser_sbti() {
+        return user_sbti;
     }
-    public void setSbti(String sbti) {
-        this.sbti = sbti;
+    public void setUser_sbti(String user_sbti) {
+        this.user_sbti = user_sbti;
     }
 }

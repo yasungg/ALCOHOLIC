@@ -2,19 +2,58 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import AxiosApi from "../api/AxiosApi";
-import Logo from "../images/Logo.JPG"
+import Hmm from "../images/hmm.png";
+import X from "../images/x.png";
 
-const Container = styled.div`
+const OutBox = styled.div`
+  padding-bottom: 100px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  background-color: beige;
+`;
 
-  img {
-    width: 15em;
-    border-radius: 50%;
+const Underline = styled.div`
+  width: 480px;
+  height: 10px;
+  border-bottom: 1px solid black;
+`;
+
+const Container = styled.div`
+  width: 480px;
+  height: 600px;
+  border: 1px solid black;
+  background-color: white;
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 50px;
+
+  .imo {
+    width: 16em;
+    /* border-radius: 50%; */
   }
+
+  
+  .close {
+    width: 15px;
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .content1 {
+    margin-top: -13px;
+    text-align: center;
+    margin-bottom: 0px;
+  }
+
   
   .box {
     box-sizing: border-box;
@@ -74,10 +113,7 @@ const Container = styled.div`
     }
   }
 
-
-
 `;
-
 
 
 const SBTIMain = () => {
@@ -104,25 +140,32 @@ const SBTIMain = () => {
   }, []);
 
   return (
-    <Container>
-      <a href="/">
-        <img src={Logo} alt="홈 이동 로고" />
-      </a>
-      <div>
-        <p>SBTI 시작하기</p>
-      </div>
-      <div>
-        {userInfo.map(user => (
-          <div key={user.no}>
-            <p>{user.name}님의 기존 SBTI 결과: {user.sbti}</p>
-          </div>
-        ))}
-      </div>
-      <div>
-        <button className="box" onClick={onClickSBTI}>SBTI</button>
-      </div>
+    <OutBox>
+      <Container>
+        <img className="close" src={X} alt="x" onClick={()=>{navigate("/")}}/>
+        <div className="top">
+          <p className="content1">술BTI 검사</p>
+        </div>
+        <Underline />
+        <div style={{marginBottom: '20px'}}>
+          <p>1분만에 분석해드려요!</p>
+        </div>
+        <div>
+          <img className="imo" src={Hmm} alt="이모티콘" /> 
+        </div>
+        <div style={{marginTop: '60px'}}>
+          {userInfo.map(user => (
+            <div key={user.user_no}>
+              <p>{user.user_name}님의 기존 SBTI 결과: {user.user_sbti}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <button className="box" onClick={onClickSBTI}>SBTI 시작하기</button>
+        </div>
 
-    </Container>
+      </Container>
+    </OutBox>
   );
 };
 export default SBTIMain;

@@ -13,8 +13,8 @@ const AxiosApi = {
 
   sbtiUpdate: async(no, sbti) => {
     const member = {
-      no : no,
-      sbti : sbti
+      user_no : no,
+      user_sbti : sbti
     };
     return await axios.post(KH_DOMAIN + "/sbtiupdate", member);
   },

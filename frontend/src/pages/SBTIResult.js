@@ -109,15 +109,15 @@ const SBTIResult = () => {
     <Container>
       <div>
         {userInfo.map(user => (
-          <div key={user.no}>
-            <p>{user.name}님의 SBTI 결과: {user.sbti}</p>
+          <div key={user.user_no}>
+            <p>{user.user_name}님의 SBTI 결과: {user.user_sbti}</p>
           </div>
         ))}
       </div>
       <div>
         <p>SBTI 유형에 맞는 추천 전통주</p>
       </div>
-      <div>
+      <div> 
         {sbtiInfo.map(({ recImg, recommend }) => (
           <div key={recImg}>
             <div>

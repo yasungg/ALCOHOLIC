@@ -34,14 +34,14 @@ public class MemberDAO {
                 String sbti = rs.getString("USER_SBTI");
 
                 MemberVO vo = new MemberVO();
-                vo.setNo(no);
-                vo.setId(id);
-                vo.setPw(pw);
-                vo.setName(name);
-                vo.setJumin(jumin);
-                vo.setEmail(email);
-                vo.setPhone(phone);
-                vo.setSbti(sbti);
+                vo.setUser_no(no);
+                vo.setUser_id(id);
+                vo.setUser_id(pw);
+                vo.setUser_name(name);
+                vo.setUser_jumin(jumin);
+                vo.setUser_email(email);
+                vo.setUser_phone(phone);
+                vo.setUser_sbti(sbti);
                 list.add(vo);
             }
             Common.close(rs);
@@ -54,16 +54,16 @@ public class MemberDAO {
         return list;
     }
 
-    public boolean sbtiUpdate(int userNo, String userSbti) {
+    public boolean sbtiUpdate(int user_no, String user_sbti) {
         int result = 0;
         String sql = "UPDATE MEMBER_INFO SET USER_SBTI = ? WHERE USER_NO = ?";
         try {
             conn = Common.getConnection();
             pStmt = conn.prepareStatement(sql);
-            pStmt.setString(1,userSbti);
-            pStmt.setInt(2, userNo);
+            pStmt.setString(1,user_sbti);
+            pStmt.setInt(2, user_no);
             result = pStmt.executeUpdate();
-            System.out.println("sbti 업데이트 결과: " + userNo + " -> " + userSbti);
+            System.out.println("sbti 업데이트 결과: " + user_no + " -> " + user_sbti);
 
         } catch (Exception e) {
             e.printStackTrace();

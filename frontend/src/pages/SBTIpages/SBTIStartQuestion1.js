@@ -4,29 +4,64 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 
-const Container = styled.div`
+const OutBox = styled.div`
+  padding-bottom: 100px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #edeae3;
-  margin: 10%;
+  align-items: center;
+  background-color: beige;
+`;
+
+const Container = styled.div`
+  width: 480px;
+  height: 600px;
+  border: 1px solid black;
+  background-color: white;
+  margin-top: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 50px;
+  text-align: left;
+
+  .progress {
+    p {
+      font-size: 1.7em;
+      font-weight: bold;
+      color: brown;
+    }
+  }
 
   .question{
-    margin-top: 10%;
+    margin-top: -130px;
+    margin-left: 40px;
+    margin-right: 40px;
     font-size: 1.5em;
-    color: #333;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
 
   }
 
-  .button{
+  .buttonBox {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-evenly;
+  }
+
+  button{
+    cursor: pointer;
+    width: 180px;
+    height: 60px;
+    margin-right: 25px;
+    margin-left: 25px;
+    box-sizing: border-box;
+    border: 2px solid black;
   }
 
 
@@ -98,20 +133,25 @@ const SBTIStartQuestion1 = () => {
 
 
   return (
-    <Container>
-      <div className="question">
-        {questInfo && questInfo.map(quest => (
-          <div key={quest.number}>
-            <p>질문 : {quest.question}</p>
-          </div>
-        ))}
-      </div>
-      <div className="button">
-        <button onClick={clickYes}>그렇다</button>
-        <button onClick={clickNo}>아니다</button>
-      </div>
+    <OutBox>
+      <Container>
+        <div className="progress">
+          <p>1/20</p>
+        </div>
+        <div className="question">
+          {questInfo && questInfo.map(quest => (
+            <div key={quest.number}>
+              <p>{quest.question}</p>
+            </div>
+          ))}
+        </div>
+        <div className="buttonBox">
+          <button onClick={clickYes}>그렇다</button>
+          <button onClick={clickNo}>아니다</button>
+        </div>
 
-    </Container>
+      </Container>
+    </OutBox>
   );
 };
 export default SBTIStartQuestion1;
