@@ -7,8 +7,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
-
 public class MemberDAO {
     private Connection conn = null;
     private Statement stmt = null;
