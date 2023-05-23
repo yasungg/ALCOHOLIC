@@ -142,8 +142,9 @@ const SBTIMain = () => {
           {userInfo.map((user) => (
             <div key={user.user_no}>
               <p>
-                {user.user_name}님의 기존 SBTI 결과: {user.user_sbti}
+                {user.user_name}님의 기존 SBTI 결과:
               </p>
+              <p> {user.user_sbti}</p>
             </div>
           ))}
         </div>

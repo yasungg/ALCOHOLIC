@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AxiosApi from "../api/AxiosApi";
 import X from "../Image/x.png";
+import { UserContext } from "../api/Context";
 
 const OutBox = styled.div`
   padding-bottom: 100px;
@@ -128,12 +129,13 @@ const Container = styled.div`
 `;
 
 const SBTIResult = () => {
-  let tmpSbti;
-
   const navigate = useNavigate();
 
+  const [ tmpSbti, setTmpSbti ] = useState("");
   const [userInfo, setUserInfo] = useState([]);
   const [sbtiInfo, setSbtiInfo] = useState([]);
+
+  const { isLogin, contextLogout, userNum } = useContext(UserContext); // 로그인 관리를 위한 Context API
 
   // 설문 결과에 따른 4가지 주종 유형 계산
   const SBTIResult = () => {
@@ -157,24 +159,33 @@ const SBTIResult = () => {
     };
   };
 
+  const userInfos = async () => {
+    const rsp = await AxiosApi.userNumber(userNum);
+    if (rsp.status === 200) setUserInfo(rsp.data);
+  };
+  userInfos();
+
   const result = SBTIResult();
-  console.log("첫번째 " + result.maxVariable); // 가장 큰 값의 변수명
-  console.log("두번째" + result.secondMaxVariable); // 두 번째로 큰 값의 변수명
-  if (result.maxVariable === "takju") {
-    tmpSbti = "숙취가 두렵지 않은 탁주 러버";
-    AxiosApi.sbtiUpdate(10000001, tmpSbti);
+  if(result.maxVariable === "takju") {
+    setTmpSbti("숙취가 두렵지 않은 탁주 러버");
+    AxiosApi.sbtiUpdate(userNum, "숙취가 두렵지 않은 탁주 러버");
+    console.log(userNum);
+    console.log("탁주 1등");
   }
-  if (result.maxVariable === "chungju") {
-    tmpSbti = "청아하고 우아한 한잔";
-    AxiosApi.sbtiUpdate(10000001, tmpSbti);
+  if(result.maxVariable === "chungju") {
+    setTmpSbti("청아하고 우아한 한잔");
+    AxiosApi.sbtiUpdate(userNum, "청아하고 우아한 한잔");
+    console.log("청주 1등");
   }
-  if (result.maxVariable === "wine") {
-    tmpSbti = "와인 말고 전통주";
-    AxiosApi.sbtiUpdate(10000001, tmpSbti);
+  if(result.maxVariable === "wine") {
+    setTmpSbti("와인 말고 전통주");
+    AxiosApi.sbtiUpdate(userNum, "와인 말고 전통주");
+    console.log("과실주 1등");
   }
-  if (result.maxVariable === "spirits") {
-    tmpSbti = "깔끔하고 묵직하게";
-    AxiosApi.sbtiUpdate(10000001, tmpSbti);
+  if(result.maxVariable === "spirits") {
+    setTmpSbti("깔끔하고 묵직하게");
+    AxiosApi.sbtiUpdate(userNum, "깔끔하고 묵직하게");
+    console.log("증류주 1등");
   }
 
   // 이미지나 술 이름 클릭시 해당 상세 페이지로 이동
@@ -183,12 +194,6 @@ const SBTIResult = () => {
   };
 
   useEffect(() => {
-    const userInfo = async () => {
-      const rsp = await AxiosApi.userNumber("10000001");
-      if (rsp.status === 200) setUserInfo(rsp.data);
-    };
-    userInfo();
-
     const sbtiInfo = async () => {
       const rsp = await AxiosApi.sbtiRecommend(tmpSbti);
       if (rsp.status === 200) setSbtiInfo(rsp.data);
