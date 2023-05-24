@@ -29,12 +29,14 @@ public class SbtiResultDAO {
                 String category = rs.getString("RES_CATEGORY");
                 String recommend = rs.getString("RES_SUL");
                 String img = rs.getString("RES_SUL_IMG");
+                String url = rs.getString("RES_SUL_URL");
 
                 SbtiResultVO vo = new SbtiResultVO();
                 vo.setNumber(number);
                 vo.setCategory(category);
                 vo.setRecommend(recommend);
                 vo.setRecImg(img);
+                vo.setRecUrl(url);
                 list.add(vo);
             }
             Common.close(rs);

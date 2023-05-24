@@ -11,4 +11,5 @@ public class SbtiResultVO {
     private String category;
     private String recommend;
     private String recImg;
+    private String recUrl;
 }

@@ -81,7 +81,7 @@ public class MemberController {
     // GET: 개별 유저 정보 전체 조회
     @GetMapping("/user")
     public ResponseEntity<List<MemberVO>> memberInfo(@RequestParam int no) {
-        System.out.println("유저 번호: " + no);
+        System.out.println("정보 전체 조회된 유저 번호: " + no);
         MemberDAO dao = new MemberDAO();
         List<MemberVO> list = dao.memberSelect(no);
         return new ResponseEntity<>(list, HttpStatus.OK);

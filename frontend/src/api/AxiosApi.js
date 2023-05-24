@@ -101,12 +101,17 @@ const AxiosApi = {
   searchResultGet: async (productname) => {
     return await axios.get(KH_DOMAIN + `/search?productname=${productname}`);
   },
+
+  // 곽재형
+  // sbti 질문과 데이터 받아오기
   sbtiQuestion: async (number) => {
     return await axios.get(KH_DOMAIN + `/sbti?number=${number}`);
   },
+  // 유저 정보 전체 조회
   userNumber: async (no) => {
     return await axios.get(KH_DOMAIN + `/user?no=${no}`);
   },
+  // 유저 테이블에 sbti 결과 업데이트
   sbtiUpdate: async (no, sbti) => {
     const member = {
       user_no: no,
@@ -114,6 +119,7 @@ const AxiosApi = {
     };
     return await axios.post(KH_DOMAIN + "/sbtiupdate", member);
   },
+  // sbti 추천 술 목록 불러오기
   sbtiRecommend: async (category) => {
     return await axios.get(KH_DOMAIN + `/sbtirecommend?cat=${category}`);
   },

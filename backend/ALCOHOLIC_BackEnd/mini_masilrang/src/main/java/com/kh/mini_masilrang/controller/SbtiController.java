@@ -28,7 +28,7 @@ public class SbtiController {
 
     @GetMapping("/sbtirecommend")
     public  ResponseEntity<List<SbtiResultVO>> sbtiList(@RequestParam String cat) {
-        System.out.println("카테고리: " + cat);
+        System.out.println("카테고리 검색 결과: " + cat);
         SbtiResultDAO dao = new SbtiResultDAO();
         List<SbtiResultVO> list = dao.sbtiRecommend(cat);
         return new ResponseEntity<>(list, HttpStatus.OK);
